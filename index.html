@@ -27,15 +27,19 @@
                 </div>
                 <div class="card-body">
                     <h4 class="card-text">Tasks</h4>
+                    <div class="mb-4">
+                        <label for="filter" class="form-label">Filter Tasks</label>
+                        <input type="text" class="form-control" id="filter" name="filter">
+                    </div>
                     <ul class="list-group">
                         <li class="list-group-item">
                             List item
-                            <a href="#" class="float-end">
+                            <a href="#" class="float-end delete-item">
                                 <button type="button" class="btn-close" disabled aria-label="Close"></button>
                             </a>
                         </li>
                     </ul>
-                    <a href="" class="btn btn-danger mt-2">Clear Task</a>
+                    <a href="" id ="clearBtn" class="btn btn-danger mt-2">Clear Task</a>
                 </div>
             </div>
         </div>

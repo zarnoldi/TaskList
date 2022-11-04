@@ -16,7 +16,7 @@ function loadEventListeners() {
     // Add task event
     form.addEventListener('submit', addTask)
     // Clear Task Event
-    taskList.addEventListener('click', clearTask)
+    taskList.addEventListener('click', deleteTask)
     // Filter Task
     filter.addEventListener('input', filterTaskList)
 }
@@ -29,18 +29,18 @@ function addTask(e) {
     // Create LI with class, innner html and text content
     const li = document.createElement('li'); 
     li.className = 'list-group-item'; 
-    li.innerHTML = `${taskInput.value}<a href="#" class="float-end delete-item">
+    li.innerHTML = `${taskInput.value}
+                    <a href="#" class="float-end delete-item">
                         <button type="button" class="btn-close" disabled aria-label="Close"></button>
-                     </a>`;
+                    </a>`;
 
     //Apppend to UL
     taskList.appendChild(li); 
     }
-
     e.preventDefault();
 }
 
-function clearTask(e) {
+function deleteTask(e) {
     if (e.target.classList.contains('delete-item')) {
         e.target.parentElement.remove(); 
     }
@@ -57,6 +57,4 @@ function filterTaskList(e) {
         
     });
 
-
-    
 }

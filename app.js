@@ -13,14 +13,16 @@ loadEventListeners();
 // Load all event Listners 
 
 function loadEventListeners() {
-    // Add task event
+    // Add task
     form.addEventListener('submit', addTask)
-    // Clear Task Event
+    // Delete Task
     taskList.addEventListener('click', deleteTask)
+    // Clear task
+    clearBtn.addEventListener('click', clearTasks)
     // Filter Task
-    filter.addEventListener('input', filterTaskList)
-}
+    filter.addEventListener('keyup', filterTaskList)
 
+}
 function addTask(e) {
 
     if (taskInput.value === '') {
@@ -33,28 +35,29 @@ function addTask(e) {
                     <a href="#" class="float-end delete-item">
                         <button type="button" class="btn-close" disabled aria-label="Close"></button>
                     </a>`;
-
     //Apppend to UL
     taskList.appendChild(li); 
     }
     e.preventDefault();
 }
-
 function deleteTask(e) {
     if (e.target.classList.contains('delete-item')) {
         e.target.parentElement.remove(); 
     }
 }
-
+function clearTasks(e) {
+while(taskList.firstChild){
+    taskList.removeChild(taskList.firstChild);
+}
+}
 function filterTaskList(e) {
-    console.log(e.target.value);
-    console.log(taskList.childNodes);
-    taskList.childNodes.forEach(task => {
-
-        if (e.target.value === task.innerText ) {
-            console.log('WE HAVE A MATCH');
+    const text = e.target.value.toLowerCase(); 
+    document.querySelectorAll('.list-group-item').forEach((task)=>{
+        const item = task.textContent; 
+        if (item.toLowerCase().indexOf(text) != -1) {
+            task.style.display = 'block';
+        }else{
+            task.style.display = 'none'; 
         }
-        
-    });
-
+    })
 }

@@ -3,11 +3,14 @@ const form = document.querySelector('#task-form');
 const taskInput = document.querySelector('#task');
 const taskList = document.querySelector('.list-group');
 const clearBtn = document.querySelector('#clearBtn');
-const filter = document.querySelector('#filter'); 
+const filter = document.querySelector('#filter');
+
 // Load all event listeners
 loadEventListeners(); 
 // Load all event Listners 
 function loadEventListeners() {
+    //  DOM Load event
+    document.addEventListener('DOMContentLoaded', getTasks)
     // Add task
     form.addEventListener('submit', addTask)
     // Delete Task
@@ -17,6 +20,28 @@ function loadEventListeners() {
     // Filter Task
     filter.addEventListener('keyup', filterTaskList)
 }
+
+function getTasks() {
+
+    if (localStorage.getItem('tasks') === null) {
+        tasks = []; 
+    }
+    else{
+        tasks = JSON.parse(localStorage.getItem('tasks'))
+        tasks.forEach(task => {
+           const li = document.createElement('li'); 
+           li.className = 'list-group-item'; 
+           li.innerHTML = `${task}
+                    <a href="#" class="float-end delete-item">
+                        <button type="button" class="btn-close" disabled aria-label="Close"></button>
+                    </a>`;
+           taskList.appendChild(li);         
+        }); 
+    }
+}
+
+
+
 function addTask(e) {
 
     if (taskInput.value === '') {
@@ -60,7 +85,11 @@ function deleteTask(e) {
     removeTaskfromLocalStorage(e.target.value.textContent)
 }
 
-function removeTaskfromLocalStorage(params) {
+function removeTaskfromLocalStorage(task) {
+
+console.log('remove tasks');
+
+
     
 }
 

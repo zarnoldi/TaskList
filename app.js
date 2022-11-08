@@ -120,5 +120,3 @@ function filterTaskList(e) {
         }
     })
 }
-
-console.log(taskList);
